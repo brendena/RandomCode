@@ -1,0 +1,68 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="locations-menu">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <paper-card heading="Card Title">
+      <div class="card-content">
+        <a data-route="locations" href="/locations" on-click="onDataRouteClick">
+          <iron-icon icon="info"></iron-icon>
+          <span>all locations</span>
+        </a>
+      </div>
+    </paper-card>
+    <paper-card heading="Card Title">
+      <div class="card-content">search locations</div>
+    </paper-card>
+    <paper-card heading="Card Title">
+      <button on-click="addCurrentLocations">add current locations</button>
+
+      <div class="card-content">current location</div>
+    </paper-card>
+              
+  </template>
+
+  <script>
+    (function() {
+      Polymer({
+        is: 'locations-menu',
+
+        properties: {
+        },
+        addCurrentLocations: function(){
+          var addLoc = document.createElement('add-location');
+          
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(this._getCurrentLocation.bind(addLoc));
+          }
+          
+          
+          console.log(addLoc)
+          this.appendChild(addLoc);
+        },
+        _getCurrentLocation(position){
+          
+          this.longitude = position.coords.longitude;
+          this.latitude = position.coords.latitude;
+          console.log(this)
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

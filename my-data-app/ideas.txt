@@ -1,0 +1,39 @@
+TODO
+can't seem to get the redraw to work right
+
+default page  kind of
+make sure it waights untill gamps is finished loading
+you can only go to a certain list of places else 404 error
+
+
+
+
+so i'm thinking about edit most of this code.
+To make it into a class like object.
+so like
+
+{
+	//attributes-
+	typeOfDate
+	//maby
+	startDate
+	googleChartObject
+
+	endDate
+	//each promise will be its own fuction
+	//i think that would be the best way of doing this.
+}
+
+
+Also i'm think i should have a perfecial way of
+handling comments.  So i don't have to just
+keep uncommenting stuff evertime.
+
+Also maby some tdd would be cool.
+
+also probably some error handling would be cool
+
+Some documentation would also be really cool
+
+
+maby use google anaylitcs to show data

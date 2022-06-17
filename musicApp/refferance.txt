@@ -1,0 +1,22 @@
+https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats#Browser_compatibility
+//support chart
+
+http://www.html5rocks.com/en/tutorials/file/xhr2/
+//new way of bring in data with new XHMLrequest
+
+
+https://github.com/cwilso/AudioContext-MonkeyPatch
+//sort ofbackwards support for audio
+
+http://webaudioapi.com/samples/
+
+
+http://creativejs.com/resources/web-audio-api-a-bit-more-advanced/
+
+http://stuartmemo.com/making-sine-square-sawtooth-and-triangle-waves/
+
+http://www.decossoftdev.com/insight/blog/2013/09/06/An-Introduction-To-HTML-5-Web-Audio-API
+
+http://stuartmemo.com/controlling-web-audio-api-volume-using-the-html5-slider-element/
+
+http://codepen.io/dudleystorey/pen/zqgGn/?editors=001

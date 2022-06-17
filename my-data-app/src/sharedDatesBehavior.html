@@ -1,0 +1,78 @@
+<script>
+	var MyBehaviors = MyBehaviors || {};
+	var sharedDatesBehaviorImpl = {
+		_convertDateYYYYMMDDInt: function(date) {
+			return parseInt(date.toISOString().slice(0,10).replace(/-/g,""));
+		},
+		_figureStartEndDateBeforeInt: function(startingDate, typeDate){
+			returnDates = {
+				"startDate":"",
+				"endDate":"",
+			}
+			if(typeDate == "week"){
+				returnDates.startDate = new Date(startingDate - (7*dayLength));
+				returnDates.endDate = startingDate;
+			}
+			else if(typeDate == "month"){
+				/*hack to get the length of a month
+				/ http://stackoverflow.com/questions/1184334/get-number-days-in-a-specified-month-using-javascript
+				*/
+				year = startingDate.getFullYear();
+				month = startingDate.getMonth();
+				returnDates.startDate = new Date(year,month,1);
+				returnDates.endDate = new Date(year,month+1,0);
+			}
+			else{
+				returnDates.startDate = startingDate;
+				returnDates.endDate = startingDate;
+			}
+	 		//console.log(returnDates)
+			return returnDates;
+		},
+		_figureStartEndDate: function(startingDate, typeDate){
+			var returnDates = this._figureStartEndDateBeforeInt(startingDate, typeDate);
+			returnDates = {
+				"startDate":this._convertDateYYYYMMDDInt(returnDates.startDate),
+				"endDate":this._convertDateYYYYMMDDInt(returnDates.endDate),
+			}
+			return returnDates;
+			
+		},
+		/*
+		/got function from here
+		/https://gist.github.com/ralphcrisostomo/3141412
+		*/
+		_compressArray: function (original) {
+ 
+			var compressed = [];
+			// make a copy of the input array
+			var copy = original.slice(0);
+		 
+			// first loop goes over every element
+			for (var i = 0; i < original.length; i++) {
+		 
+				var myCount = 0;	
+				// loop over every element in the copy and see if it's the same
+				for (var w = 0; w < copy.length; w++) {
+					if (original[i] == copy[w]) {
+						// increase amount of times duplicate is found
+						myCount++;
+						// sets item to undefined
+						delete copy[w];
+					}
+				}
+		 
+				if (myCount > 0) {
+					var a = new Object();
+					a.value = original[i];
+					a.count = myCount;
+					compressed.push(a);
+				}
+			}
+		 
+			return compressed;
+		}
+	}
+
+	MyBehaviors.sharedDatesBehavior = sharedDatesBehaviorImpl;
+</script>

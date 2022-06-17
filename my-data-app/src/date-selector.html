@@ -1,0 +1,164 @@
+
+
+<link rel="import" href="../../paper-button/paper-button.html">
+<link rel="import" href="../../iron-selector/iron-selector.html">
+<!--
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+-->
+<link rel="import" href="./sharedDatesBehavior.html">
+<dom-module id="date-selector">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      #ironSelected{
+        display:flex;
+        justify-content: center;
+      }
+      #ironSelected > paper-button{
+        flex: 1;
+      }
+      #currentDateBar{
+        display:flex;
+        justify-content: center;
+      }
+      #currentDateBar > * {
+        flex:1;
+        text-align: center;
+      }
+    </style>
+    <!-- flex box to make thes stretch -->
+    <iron-selector id="ironSelected" selected="{{dateType}}" attr-for-selected="date" >
+      <paper-button date="day">Day</paper-button>
+      <paper-button date="week">Week</paper-button>
+      <paper-button date="month">Month</paper-button>
+    </iron-selector>
+
+
+    <div id="currentDateBar">
+      <paper-button id="downDate" on-tap="_changeDate"> &lt </paper-button>
+      <p>[[currentDateSelectedDisplay]]</p>
+      <paper-button id="upDate" on-tap="_changeDate"> &gt</paper-button>
+    </div>
+
+    <p>{{dateType}}</p>
+  
+  </template>
+
+  <script>
+
+    Polymer({
+      is: 'date-selector',
+      behaviors:[MyBehaviors.sharedDatesBehavior],
+      properties:{
+        currentDateSelected:{
+          type: Object,
+          notify: true,
+          reflectToAttribute: true,
+          value: function(){
+            return  new Date()
+          }
+        },
+        currentDateSelectedDisplay:{
+          type: String,
+          value: function(){
+            return ""
+          }
+        },
+        dateType:{
+          type:String,
+          notify: true,
+          reflectToAttribute: true,
+          value:"week",
+          observer: '_dateChanged'
+        },
+        days:{
+          type: Array,
+          value: function(){
+            var weekday = new Array(7);
+            weekday[0] =  "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            return weekday;
+          },
+        },
+        months:{
+          type:Array,
+          value: function(){
+            var month = new Array(12);
+            month[0] = "January"
+            month[1] = "Febuary"
+            month[2] = "March"
+            month[3] = "April"
+            month[4] = "May"
+            month[5] = "June"
+            month[6] = "July"
+            month[7] = "August"
+            month[8] = "September"
+            month[9] = "October"
+            month[10] = "November"
+            month[11] = "December"
+          }
+        },
+        dateLength:{
+          type:Number,
+          value:function(){
+            return (60*60*24*1*1000)
+          }
+        }
+      },
+      _changeDate: function(e){
+        /*/////////////////////////////////////////////
+        /    Weird Hack
+        /
+        / when you subrack it turns it into 
+        / linux time which you can then convert 
+        / to a date object.  But it doesn't
+        / when you add so to force it into
+        / that situation i subtract it
+        / by Zero.
+        *//////////////////////////////////////////////
+        var multiplier = 1;
+        if(this.dateType == "week"){
+          multiplier = 7;
+        }
+        else if(this.dateType == "month"){
+          multiplier = 30;
+        }
+
+        if(e.target.id == "downDate"){
+          this.currentDateSelected = new Date(this.currentDateSelected - (this.dateLength * multiplier))
+        }
+        else{
+          this.currentDateSelected = new Date(this.currentDateSelected - 0 + (this.dateLength * multiplier))
+        }
+        
+        console.log(this.currentDateSelected)
+        this._dateChanged()
+      },
+      _dateChanged: function(){
+        if(this.dateType == "day"){
+          this.currentDateSelectedDisplay = this._convertDateToString(this.currentDateSelected);
+        }
+        else if(this.dateType == "week" || this.dateType == "month"){
+          dates = this._figureStartEndDateBeforeInt(this.currentDateSelected, this.dateType)
+          this.currentDateSelectedDisplay = this._convertDateToString(dates.startDate) + " - " + this._convertDateToString(dates.endDate)
+        }
+      },
+      _convertDateToString: function(date){
+        return "" +
+        (date.getMonth()+ 1) + "/" +
+        date.getDate() + "/" + 
+        date.getFullYear()
+      }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,66 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="location-page">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <template is="dom-repeat" items="{{FBdata}}">
+        <!--<div>{{index}}</div>-->
+        <div>{{item.title}}</div>
+        <!--<div>{{item.id}}</div>-->
+        <a data-route="trips" href$="{{_computeUrl(item.id)}}">
+          <iron-icon icon="info"></iron-icon>
+          <span>places</span>
+        </a>
+        <hr>
+    </template>
+    
+     <a data-route="addPlace" href="/addPlace">
+          <paper-button>add place</paper-button>
+     </a>
+    
+
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: 'location-page',
+        properties: {
+          FBdata: {
+            type: "Array",
+            value: function() {
+              return [];
+            }
+          }
+        },
+        ready: function(){
+          this.FBdata = [
+            {"title" : "subway", "id": "1"},
+            {"title" : "subwayAgain","id": "2"},
+            {"title" : "Harold & Kumar Go to subway","id": "3"},
+            {"title" : "late night trip to subway","id": "4"}
+          ];
+          console.log(this.FBdata)
+        },
+        _computeUrl: function(id){
+          return "/trips/" + id;
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

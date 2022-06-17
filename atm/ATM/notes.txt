@@ -1,0 +1,15 @@
+﻿1
+To construct the coffee what i was thinking is create a picture for each thing and place it
+into the world at specific places.
+So then we can mix and match everthing. 
+
+2
+When we open the new window in a serperate window we can take a screen shot of what the coffe will look like
+
+https://stackoverflow.com/questions/1163761/capture-screenshot-of-active-window#1163770
+
+
+
+3.
+
+I should add add a ui id so i can search by id

@@ -1,0 +1,72 @@
+﻿{
+  "AmericanNames": [
+    {
+      "Name": "Espresso",
+      "Price": "3",
+      "ingredents": [
+        "Espresso"
+      ]
+    },
+    {
+      "Name": "Macchiato",
+      "Price": "10",
+      "ingredents": [
+        "Milk Foam",
+        "Espresso"
+      ]
+    },
+    {
+      "Name": "Latte",
+      "Price": "20",
+      "ingredents": [
+        "Milk Foam",
+        "Steamed Milk",
+        "Espresso"
+      ]
+    },
+    {
+      "Name": "Flat White",
+      "Price": "20",
+      "ingredents": [
+        "Steamed Milk",
+        "Espresso"
+      ]
+    },
+    {
+      "Name": "Cappuccino",
+      "Price": "20",
+      "ingredents": [
+        "Chocolate Powder",
+        "Milk Foam",
+        "Steamed Milk",
+        "Espresso"
+      ]
+    },
+    {
+      "Name": "Mocha",
+      "Price": "20",
+      "ingredents": [
+        "Steamed Milk",
+        "Hot Chocolate",
+        "Espresso"
+      ]
+    },
+    {
+      "Name": "Doppio",
+      "Price": "20",
+      "ingredents": [
+        "Espresso",
+        "Espresso"
+      ]
+    },
+    {
+      "Name": "Long Black",
+      "Price": "20",
+      "ingredents": [
+        "Water",
+        "Espresso"
+      ]
+    }
+  ]
+
+}

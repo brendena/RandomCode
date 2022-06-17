@@ -1,0 +1,191 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../app-route/app-route.html">
+<link rel="import" href="../app-route/app-location.html">
+
+<link rel="import" href="../app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../app-layout/app-header/app-header.html">
+<link rel="import" href="../app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="./src/my-icons.html">
+<link rel="import" href="./src/log-in.html">
+
+<dom-module id="my-data-app">
+  <template>
+    <style>
+      :host {
+        --app-primary-color: #4285f4;
+        --app-secondary-color: black;
+
+        display: block;
+      }
+
+      app-header {
+        color: #fff;
+        background-color: var(--app-primary-color);
+      }
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+        color: var(--app-secondary-color);
+        line-height: 40px;
+      }
+
+      .drawer-list a.iron-selected {
+        color: black;
+        font-weight: bold;
+      }
+    </style>
+
+    <app-location use-hash-as-path route="{{route}}" id="appLocation"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{data}}"> 
+
+    <app-drawer-layout fullbleed force-narrow="[[forceNarrow]]">
+      <!-- Drawer content -->
+      <app-drawer id="drawer">
+        <app-toolbar>Menu</app-toolbar>
+        <iron-selector id="naviationSelector" selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation" on-tap="updatePage">
+          <a name="survey-page" href="#/survey-page">Daily Survey</a>
+          <a name="my-view2" href="#/my-view2">View Two</a>
+          <a name="my-view3" href="#/my-view3">View Three</a>
+          <a name="my-view4" href="#/my-view4">View Four</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2O3_mWyXEV028GgLH8FfLaT248u5qpIDermkfy2js2Bkh-A/viewform">Take Survey</a>
+        </iron-selector>
+
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region>
+
+        <app-header condenses reveals effects="waterfall">
+          <app-toolbar>
+            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+
+            <div main-title>
+                My Data App
+            </div>
+            <log-in style="float:right; display:flex"></log-in>
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages
+            selected="[[data.page]]"
+            attr-for-selected="name"
+            fallback-selection="view404"
+            role="main">
+
+          <survey-page name="survey-page"></survey-page>
+          <my-view2 name="my-view2"></my-view2>
+          <my-view3 name="my-view3"></my-view3>
+          <my-view4 name="my-view4"></my-view4>
+          <my-view404 name="my-view404"></my-view404>
+
+        </iron-pages>
+      </app-header-layout>
+    </app-drawer-layout>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-data-app',
+      properties: {
+        forceNarrow: {
+          type: Boolean,
+          value: false
+        },
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged',
+        },
+      },
+      drawerPanel: function(){
+        this.forceNarrow =  !this.forceNarrow;
+        this.$.drawer.toggle()
+      },
+      updatePage: function(event){
+        /*
+        if the first thing you touched was a
+        A tag then update the page with the url.
+        */
+        
+        if(event.path[0].tagName == "A"){
+          this.page = event.path[0].name
+          console.log(this.page)
+        }
+      },
+      /*
+        default page redirect
+      */
+      attached: function() {
+        /*attached to app-location so it will update when there is no url*/
+        console.log("attached")
+        console.log(this.route.path)
+        if (!this.route.path) {
+          this.page = "survey-page"
+          this.set('route.path', '#/survey-page');
+          window.location.hash = "#/survey-page";
+        }
+        else{
+          this.page = this.route.path.replace(/[^\w\s-]/gi, '');
+          this.set('route.path', '#' + this.page);
+          window.location.hash = "#" + this.page;
+        }
+      },
+
+      
+
+      observers: [
+        '_routePageChanged(routeData.page)',
+      ],
+
+      _routePageChanged: function(page) {
+        this.page = page || 'dailySurvey';
+
+        if (!this.$.drawer.persistent) {
+          this.$.drawer.close();
+        }
+      },
+
+      _pageChanged: function(page) {
+        console.log("fired")
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl("./src/" + page + '.html');
+        //console.log(page)
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+        //this.page = "components/my-data-app/" + page + ".html";
+      },
+
+      _showPage404: function() {
+        this.page = 'my-view404';
+      },
+    });
+  </script>
+</dom-module>

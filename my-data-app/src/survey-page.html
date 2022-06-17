@@ -1,0 +1,141 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../google-chart/google-chart.html">
+
+<link rel="import" href="./googleSheetsBehavior.html">
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="./date-selector.html">
+
+<dom-module id="survey-page">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      #appendGraphsDiv{
+        display:flex;
+        flex-wrap:wrap;
+        align-items: center;
+      }
+      google-chart{
+        padding-left:30px;
+        /*
+        flex: 1;
+        */
+      }
+      /*
+      @media screen and (max-width: 1024px) {
+        google-chart {
+          height:400px
+          width: 800px;
+        }
+      }
+      */
+      .error{
+        width: 80%;
+        text-align: center;
+        background: grey;
+        font-size: 10vh;
+        color: black;
+        border-width: 10px;
+        border-color: lightgreen;
+        margin: 5vw;
+        border-style: solid;
+      }
+    </style>
+    <date-selector current-date-selected="{{currentDateSelected}}" date-type={{dateType}}> </date-selector>
+    <div class="card">
+
+      
+      <div id="appendGraphsDiv">
+    </div>
+
+
+    <button on-tap="test">test</button>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'survey-page',
+      behaviors:[MyBehaviors.googleSheetsBehavior],
+      properties: {
+        currentDateSelected:{
+          type: Object,
+          observer: 'googleChartDelay'
+        }
+      },
+      test: function(){
+        /*
+        var allGoogleCharts = this.$.appendGraphsDiv.getElementsByTagName("google-chart")
+        console.log(allGoogleCharts)
+        for(var i = 0; i < allGoogleCharts.length; i++){
+          allGoogleCharts[i].setAttribute("height", "1000px")
+          allGoogleCharts[i].setAttribute("width", "1000px")
+          allGoogleCharts[i].redraw();  
+        }
+        */
+      },
+      ready: function(){
+        /*
+        var media = window.matchMedia('(max-width: 1024px)');
+        var that = this;
+        media.addListener(function() {
+          console.log("changed the size")
+          var allGoogleCharts = that.$.appendGraphsDiv.getElementsByTagName("google-chart")
+          console.log(allGoogleCharts)
+          for(var i = 0; i < allGoogleCharts.length; i++){
+            allGoogleCharts[i].redraw();  
+          }
+        });
+        */
+      },
+      getGoogleCharts: function(){
+        var appendGraphsDiv = this.$.appendGraphsDiv;
+        var that = this;
+        this.getGraphs = this.gs_getRowsFromDate(this.currentDateSelected,this.dateType)
+        this.getGraphs.then(function(result){
+
+          console.log(result)
+          appendGraphsDiv.innerHTML = "";
+          if("Error" in result){
+            console.log("no Data in the view")
+            console.log(that)
+            var errorMessage = document.createElement("div")
+            errorMessage.setAttribute("class", "style-scope "+ that.tagName.toLowerCase() +" error");
+            errorMessage.innerHTML = result["Error"];
+            appendGraphsDiv.appendChild(errorMessage)
+          }
+          else{
+            appendGraphsDiv.innerHTML = "";
+            for(var i = 0; i < result.length; i++){
+              var child = document.createElement("google-chart")
+              child.setAttribute("type",result[i]["type"])
+              child.setAttribute("options",result[i]["options"])
+              child.setAttribute("cols",result[i]["cols"])
+              child.setAttribute("rows",result[i]["rows"])
+              appendGraphsDiv.appendChild(child)
+            }
+          }
+        })
+      },
+      googleChartDelay: function(){
+        clearTimeout(this.timerGoogleChartDelay)
+        this.timerGoogleChartDelay()
+      },
+      timerGoogleChartDelay: function(){
+        console.log("starting to get chart")
+        setTimeout(this.getGoogleCharts.bind(this), 1000)
+      }
+    });
+  </script>
+</dom-module>

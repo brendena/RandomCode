@@ -1,0 +1,3 @@
+The demo page is needed for the gpages_build.sh files.
+
+But this page is for adding demo documentation that will like into may iron-component-page pages.

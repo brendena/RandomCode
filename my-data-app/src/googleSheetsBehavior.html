@@ -1,0 +1,193 @@
+<link rel="import" href="./sharedDatesBehavior.html">
+<script>
+	/*
+		global columns
+	*/
+	var jsDateColumn = "A"
+	var MyBehaviors = MyBehaviors || {};
+	var dayLength = (60*60*24*1*1000);
+	var idForm = "15YjsXtloaw76yXLZkqiOjMbj9isSvC4M6dARwRj7JhQ";
+	var idTimeTracking = "1_FVIkOQi81HCfz46kXQblE7tQayUneECs-N3QcaDE84";
+	var colSP = 2; //columns starting point
+	var dateBehav = MyBehaviors.sharedDatesBehavior;
+	/*
+		should have global keys up here
+	*/
+
+	var _getRowsWithinDateBounds = function(startDate, endDate, range){
+		rangeRows = {
+			"start": -1,
+			"end": -1,
+		}
+		/*
+		console.log("\nstart Date: " +startDate+ "end Date " + endDate +"\n")
+		//*/
+		for(var i = 0; i < range.values.length; i++){
+			var dateI = dateBehav._convertDateYYYYMMDDInt(new Date(range.values[i][0]))
+			/*///////////////////////////////////////////
+			/	I converted the dates to ints so i 
+			/	can do logic operators on them.
+			/
+			/You can do this because i convert the dates
+			/to YYYYMMDD so because the dates are
+			/order in importants.
+			//////////////////////////////////////////*/
+			if(startDate <=  dateI && dateI <= endDate  ){
+				if(rangeRows.start == -1){
+					rangeRows.start = i + colSP;
+					rangeRows.end = i + colSP
+				}
+				else{
+					rangeRows.end = i + colSP;
+				}
+			}
+			else if(rangeRows.start != -1 && rangeRows.start != 1){
+				break;
+			}
+
+
+		}
+		return rangeRows;
+	}
+
+	var _determineChartType = function(singleCellValue){
+		/*
+			This only works if none of my catigorical question are
+			null
+		*/
+		//console.log("\n testing results \n")
+		//console.log(singleCellValue)
+		//console.log(Number.isNaN(Number(singleCellValue)))
+		if(Number.isNaN(Number(singleCellValue))){
+			return {"chartType" :"pie", "dataType": "string"};
+		}
+		else{
+			return {"chartType" :"line", "dataType": "number"};
+
+		}
+	}
+	var _getDayToSpecificMonth = function(date,startingDate){
+		date = new Date(date)
+		if(date.getMonth() != startingDate.getMonth()){
+			//get number days in a month
+			numberDaysInThisMonth = new Date(startingDate.getYear(),startingDate.getMonth() + 1, 0).getDate()
+			return numberDaysInThisMonth + date.getDate();
+		}
+		return date.getDate();
+	}
+	var _getLineData = function(cellValues,tc){
+		var dateForMonth = new Date(cellValues.values[0][0]);
+		var chartRowString = ""
+		for(i = 0; i < cellValues.values.length; i++){
+			chartRowString += '['+ _getDayToSpecificMonth(cellValues.values[i][0], dateForMonth) +', '+ cellValues.values[i][tc] + ']';
+			if((i+1) < cellValues.values.length){
+				chartRowString += ',';
+			}
+		}
+		return chartRowString;
+	}
+	var _getPieData = function(cellValues,tc){
+		var results = {};
+		for(i = 0; i < cellValues.values.length; i++){
+			var curCellValue = cellValues.values[i][tc]
+			if(typeof(results[curCellValue]) == 'undefined'){
+				results[curCellValue] = 1;
+			}
+			else{
+				results[curCellValue]++;
+			}
+		}
+		stringifyResults = "";
+		for(var result in results){
+			stringifyResults += '["' + result + '",' + results[ result ] +'],'
+		}
+		stringifyResults = stringifyResults.slice(0,-1);
+		return stringifyResults;
+	}
+
+	var _figureDateObject = function(cellValues, cellHeader, typeDate){
+		console.log("_figureDataObject()");
+		var allGoogleCharts = [];
+
+		for(tc = 1; tc < cellValues["values"][0].length; tc++){
+			var gChartInfo = _determineChartType(cellValues.values[0][tc]);
+			var googleChartObject = {
+				"type":gChartInfo["chartType"],
+				"options": '{"title": "'+ cellHeader.values[0][tc] +'"}',
+				"cols":'[{"label": "days", "type": "'+ gChartInfo["dataType"] +'"},{"label": "days", "type": "number"}]',
+				"rows":'['
+			}
+
+			if(gChartInfo["chartType"] == "line"){
+				googleChartObject["rows"] += _getLineData(cellValues,tc);
+			}
+			else if(gChartInfo["chartType"] == "pie"){
+				googleChartObject["rows"] += _getPieData(cellValues,tc);
+			}
+			googleChartObject["rows"] += ']';
+
+			allGoogleCharts.push(googleChartObject)
+		}
+
+		console.log(allGoogleCharts);
+		//*/
+		return allGoogleCharts;
+	}
+
+	var googleSheetsImpl = {
+		gs_getRowsFromDate(startingDate, typeDate){
+			console.log("gs_getRowsFromDate")
+
+
+
+	        console.log(gapi.client.sheets.spreadsheets.values)
+
+			return new Promise(function(resolve, reject) {
+
+				dates = dateBehav._figureStartEndDate(startingDate, typeDate);
+				gapi.client.sheets.spreadsheets.values.get({
+		          spreadsheetId: idForm,
+		          //select all columns after second row
+		          range: jsDateColumn + '2:' + jsDateColumn
+		        }).then(function(response) {
+
+					var range = response.result;
+					var rowRange = _getRowsWithinDateBounds(dates.startDate,dates.endDate, range);
+					if(rowRange.start != -1){
+						/*//////////////////////////////////////////////////////
+						/ code for doing batch request
+						/https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchGet
+						/ I 
+						//////////////////////////////////////////////////////*/
+						var request = {
+				        	"spreadsheetId": idForm,
+				        	"ranges":['A1:J1', 'A'+rowRange.start+':J' + rowRange.end]
+				        }
+						gapi.client.sheets.spreadsheets.values.batchGet(request).then(function(response){
+							console.log("got through")
+							console.log(response)
+							var cellHeader = response.result.valueRanges[0]
+							var cellValues = response.result.valueRanges[1]
+							finalReturn = _figureDateObject(cellValues,cellHeader, typeDate);
+							resolve(finalReturn)
+					    }, function(response) {
+					      console.log('Error: ' + response.result.error.message);
+					    });
+
+
+
+			    	}
+			    	else{
+			    		console.log("there was nothing there");
+			    		resolve({'Error': "No Data"})
+			    	}
+		         
+		        }, function(response) {
+		          console.log('Error: ' + response.result.error.message);
+		        });
+		    });
+		}
+
+	}
+	MyBehaviors.googleSheetsBehavior = [MyBehaviors.sharedDatesBehavior, googleSheetsImpl];
+</script>

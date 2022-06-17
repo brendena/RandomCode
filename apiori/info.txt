@@ -1,0 +1,18 @@
+http://www.cs.loyola.edu/~cgiannel/assoc_gen.html
+
+At the command-line enter: executable_filename 
+lit -ascii 
+-ntrans XX Number of transactions
+-tlen YY  T for average transaction
+-nitems ZZ // number of items
+XX x 1000 transactions will be produced involving YY average number of items per transaction, 
+drawn from ZZ x 1000 total number of items. 
+
+
+lit -ascii -ntrans 10 -tlen 3 -nitems 3 > TXXLYYNZZ.txt
+
+lit -ascii -ntrans 10 -tlen 10 -nitems 1 > TXXLYYNZZ.txt
+
+lit -ascii -ntrans 100 -tlen 10 -nitems 20 > TXXLYYNZZ.txt
+
+lit > TXXLYYNZZ.data

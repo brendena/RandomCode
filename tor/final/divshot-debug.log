@@ -1,0 +1,1 @@
+{"status":404,"error":"App does not exist. Run 'divshot create <name>' with the name in your divshot.json","documentation":"https://api.divshot.com/documentation/divshot.io/failure?request_path=/apps/tor/builds&failure_mode=app_not_found"}{"error":"Divshot is shutting down Dec. 22, new app creation has been disabled."}

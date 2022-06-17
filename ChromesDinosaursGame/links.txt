@@ -1,0 +1,31 @@
+#first step is to get the basic actions working. 
+#  1. start game
+#  2. restart game
+#  3. have random actions
+#  4. get the score value
+#https://www.youtube.com/watch?v=3zeg7H6cAJw
+#second need to store the data
+#https://www.youtube.com/watch?v=RVt4EN-XdPA
+#third  create nural network
+#https://www.youtube.com/watch?v=G-KvpNGudLw
+#four use the network
+#https://www.youtube.com/watch?v=HCBX2cuA5UU
+
+
+------Try and do a basic cnn without a q style of learning
+
+1. I need to know how to manage the input
+    -- see how this guy used pong for input neural net 
+    -- https://medium.com/@dhruvp/how-to-write-a-neural-network-to-play-pong-from-scratch-956b57d4f6e0
+2. then i have to build the neural network.
+
+3. Then i can run a bunch of trials and save them to a file
+
+4. Then i can test the neural network
+
+5. Then repeat last steps untill its really good.
+
+
+---  Then try q learning
+
+http://www.danielslater.net/2016/03/deep-q-learning-pong-with-tensorflow.html
