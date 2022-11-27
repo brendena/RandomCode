@@ -1,0 +1,41 @@
+#startButton{
+    display:none;
+}
+#listUsers{
+    display:none;
+}
+#container
+{
+  border-color: rgba(0, 0, 0, .5);
+  background-color: rgba(250, 100, 100, .8);
+}
+
+
+.flex{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.flex > .answers {
+    
+    
+    justify-content: space-around;
+    
+    width: 30vw;
+    height: 30vh;
+    max-width: 40vh;
+    max-height: 17vh;
+    background-color: whitesmoke;
+    margin: auto;
+    
+    border-radius: 20px;
+    border-color: darkgrey;
+    border-width: 20px;
+    font-size: 2.7vh;
+    
+    margin-top: 30px;
+}
+.flex > #officalAnswer {
+    background:aquamarine;
+}

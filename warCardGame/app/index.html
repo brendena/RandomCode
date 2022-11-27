@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- HTML5 Hello world by kirupa - http://www.kirupa.com/html5/getting_your_feet_wet_html5_pg1.htm -->
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<title>war</title>
+</head>
+	<link rel="stylesheet" href="./styles/main.css" type="text/css" />
+	<link rel="stylesheet" href="./styles/card.css" type="text/css" />
+	<link rel="stylesheet" href="./styles/navigation.css" type="text/css" />
+<body>
+	<!-- used to center the inner content-->
+
+	<div id="gameConnectionBox">
+		<div id="gameConnectionInnerBox">
+			<div>
+				<p>my id</p>
+				<p id="pid">asdf</p>
+			</div>
+			<input type="text" name="connectionId" id="connectWith"/>
+			<button id="connectWithButton">click to connect</button>
+			<p>&hearts;</p>
+			<button id="createQRCode">create QR Code </button>
+			<div id="qrcode"></div>
+		</div>
+	</div>
+	<!-- -->
+	<ul class="navigation">
+		<li class="nav-item"><a href="#">asdf</a></li>
+		<li class="nav-item"><a href="#">ddd</a></li>
+		<li class="nav-item"><a href="#">dddd</a></li>
+		<li class="nav-item"><a href="#">dddd</a></li>
+		
+		<div id="chat">
+			<div id="chatDialog">
+				
+			</div>
+			<p>chat goes here</p>
+			<input type="text" name="chatInput" id="chatInput"/>
+			<button id="chatEntered">
+				enter chat
+			</button>
+		</div>
+	</ul>
+	
+	<input type="checkbox" id="nav-trigger" class="nav-trigger"/>
+	<label for="nav-trigger"></label>
+	<div class="site-wrap">
+		<div class="deckContainer">
+			<p id="opponentCardCount">asdf</p>
+			<div class="deck" id="opponentDeck">
+			</div>
+		</div>
+		<section id="opponent" class="cardArea">
+		</section>
+		<section id="player" class="cardArea">
+		</section>
+		<div class="deckContainer">
+			<p id="playerCardCount">asdf</p>
+			<div class="deck" id="playerDeck">
+			</div>
+		</div>
+	</div><!-- end of site wrap-->
+	
+	<!-- can't change how this element looks because i did a lot of childNodes stuff -->
+	<template>
+		<section class="container">
+			<div class="card flippedToBack" id="personCardObject">
+				<figure class="front"><span class="cardText" id="personCard">asdfaf</span></figure>
+				<figure class="back"></figure>
+			</div>
+		</section>
+	</template>
+	
+	<script type="text/javascript" src="javascript/qrcode.min.js"></script>
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="bower_components/peerjs/peer.js"></script>
+	<script type="text/javascript" src="javascript/perrOn.js"></script>
+	<script type="text/javascript" src="javascript/deckObject.js"></script>
+	<script type="text/javascript" src="javascript/usingDeckObject.js"></script>
+	<script type="text/javascript" src="javascript/interface.js"></script>
+</body>
+</html>

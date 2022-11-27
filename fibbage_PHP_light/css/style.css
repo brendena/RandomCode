@@ -1,0 +1,145 @@
+html,body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #ffbe6b;
+}
+
+.btn {
+  border: 0px;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 4vh;
+  background: #3498db;
+  padding: 10px 25px 10px 25px;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn:hover, .btn:focus{
+  background: #85d0ff;
+  text-decoration: none;
+  border-radius: 10px;
+}
+/*
+if i want to make another button
+http://css3buttongenerator.com/
+*/
+
+
+/*
+nav bar example
+http://www.w3schools.com/css/css_navbar.asp
+*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, li p {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 22px 16px;
+    text-decoration: none;
+    margin: 0;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+
+
+
+#container
+{
+  font-family: Georgia, Serif;
+  
+  margin: auto;
+  flex: .7;
+  width: 80%;
+  border: 15px solid #BADA55;
+  background-color: #fc6f5f;
+  border-radius: 40px;
+  border-top-left-radius:0px;
+  border-bottom-right-radius:0px; 
+  overflow-y: auto; 
+  box-shadow: 15px 20px;
+}
+
+@media all and (max-width: 800px ){
+    #container {
+       flex: .9;
+       width:95%;
+       border: 2.5vw solid #BADA55;
+    }
+}
+
+#center{
+    margin: 0 auto;
+    margin-top: 3%;
+    text-align: center;
+}
+
+#center > h1
+{
+    font-family: Georgia, Serif;
+    font-size: 8vh;
+}
+
+.pQuestions{
+    margin: 0 auto;
+    width: 50%;
+    background: white;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 20px auto;
+}
+
+.resizeInput{
+    height: 5vh;
+    min-height: 15px;
+    max-width: 50vw;
+    border-radius: 90px;
+    text-align: center; 
+}
+.resizeInput:focus{
+    border-color: aqua;
+    border-width: 1.2vh;
+    border-radius: 5px;
+    border-bottom-left-radius: 15px;
+    text-align: left; 
+}
+input:required:invalid, input:focus:invalid {
+  /* insert your own styles for invalid form input */
+  border-color:crimson;
+  background:hsla(34, 100%, 82%, 0.9);
+}
+input:valid {
+   border-color: #06ff00; 
+}
+/*
+input:hover{
+    margin:50px;
+}
+*/
+.whiteInput:required:invalid, .whiteInput:focus:invalid {
+  /* insert your own styles for invalid form input */
+  background:snow;
+}
+
+table{
+    margin: 0 auto;
+}
+

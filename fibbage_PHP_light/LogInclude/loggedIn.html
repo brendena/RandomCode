@@ -1,0 +1,10 @@
+<a class="btn" href="./clientOptions.php">enter Site</a>
+<button id="logOut" class="btn" href="./clientOptions.html">log out</button>
+
+<script>
+document.getElementById("logOut").addEventListener('click', function(){
+    console.log(window.location);
+    window.location.href = 'http://localhost/php/FinalTerm/fibbage_PHP_light/clientLogIn.php?logout=true';
+    
+})
+</script>

@@ -1,0 +1,106 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>maple syrup app</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="images/icon/iconSmall.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="images/icon/iconMedium.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="images/icon/iconLarge.png"/>
+
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css" >
+        <!--<link href='http://fonts.googleapis.com/css?family=IM+Fell+French+Canon:400,400italic' rel='stylesheet' type='text/css'>-->
+        
+        
+        
+        <script src="js/jquery.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+<body>
+    <main>
+        <div class="container">
+            <section class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+                <div id="logoTitle">
+                    <h1 class="title" id="topTitle">Maple</h1>
+                    <h1 class="title" id="bottomTitle">Syrup
+                        <i class="fa fa-calculator"></i>
+                    </h1>
+                </div>
+                
+                
+                <form name="sugarInformation" id="sugarInformation">
+                
+                    <div class="labelInput">
+                        <label for="sugarContent"> Sugar Content: </label> 
+                        <input name="sugarContent" id="sugarContent" type="number" step="0.01" value="1" required ><br> <!-- put place holder and remove value after debugs done-->
+                    </div>
+                    
+                    <div class="labelInput">
+                        <label for="TotalGallonsSap"> TotalGallonsSap: </label>         
+                        <input name="TotalGallonsSap"  id="TotalGallonsSap" type="number" step="0.01" value="1" required ><br>
+                    </div>
+                    
+                    <div class="labelInput">
+                        <label for="numberPerGallon"> weight per Gallon: </label> 
+                        <input name="numberPerGallon" id="numberPerGallon" type="number" step="0.01" value="1" required ><br>
+                    </div>
+                    
+                    <div class="labelInput">
+                        <label for="pricePerPound"> price per pound: </label>  
+                        <input name="pricePerPound" id="pricePerPound" type="number" step="0.01" value="1" required ><br>
+                    </div>
+            
+                    <input class="submit" type="submit" value="Send" />
+                    
+                </form>
+                
+            </section> <!--end ofsection cantained form -->
+        </div> <!-- end of container-->
+    </main>
+    
+    <div id="results">
+        <div class="container">
+            <section class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1" id="backgroundOfText">
+                <div style="flex:1;">
+                    <div id="divUpperMenu">
+                        <i class="fa fa-qrcode fa-3x upperMenu"></i>
+                        <i class="fa fa-th-list  fa-3x upperMenu"></i>
+                        <i class="fa fa-times fa-3x upperMenu"></i>
+                    </div>
+                    <section class="col-lg-10 col-lg-offset-1" id="wrapText">
+                        <div id="returnValue">nothing Yet</div>
+                    </section> <!-end of innerSection ->
+                </div>
+                <div id="buttonHolder">
+                    <div id="inputValuesCC">
+                        <div class="inputValueContainer">
+                            <p>SC</p>
+                            <p>Total</p>
+                            <p>weight</p>
+                            <p>price pound</p>
+                        </div>
+                        <div class="inputValueContainer" id="inputValues">
+
+                        </div>
+                    </div>
+                    <button style="float:left" onclick="getLastValue(-1)" ><i class="fa fa-arrow-left fa-2x" style="text-align:center; display:block;cursor:pointer" id="exitResults"></i></button> <!--getting back value -->
+                    <button style="left:50%" onclick="getLastValue(1)"><i class="fa fa-arrow-right fa-2x" style="text-align:center; display:block;cursor:pointer" id="exitResults"></i></button> <!-- getting last Value-->
+                </div> <!- end of buttonHolder->
+            </section> <!-end of background text ->
+        </div><!-end of container ->
+    </div><!-end of results ->
+    
+    
+    <div id="qrCode"></div>
+	<script src="js/jquery.js"></script>
+    <script src="js/jquery.qrcode.min.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

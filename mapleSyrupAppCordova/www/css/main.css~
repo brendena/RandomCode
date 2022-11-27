@@ -1,0 +1,234 @@
+input{
+    
+    width:100%;
+    height:40px;
+    border-radius:20px;
+    text-align:center;
+}
+body
+{
+    min-height:100%;
+}
+.labelInput{
+    padding-top:5%;
+    padding-bottom:3%;
+}
+#loadScreen
+{
+     width:100%;
+     height:100%;
+     background:white;
+     position:fixed;
+     z-index:1;
+     -webkit-transition:2s;
+     transition:2s;
+
+}
+#logo
+{
+   width: 300px;
+   height: 300px;
+   position: absolute;
+   left: 50%;
+   top: 40%; 
+   margin-left: -150px;
+   margin-top: -150px;
+   border-radius: 75px;
+}
+.container
+{
+     padding-top:8vh;
+     height:100%;
+}
+.title
+{
+    font-family: 'IM Fell French Canon', serif;
+    font-size:70px;
+    margin:0;
+    color:#FFC919;
+    opacity:0.7;
+    -webkit-transition:2s;
+    transition:2s;
+}
+.titleMiniText
+{
+    display:inline;
+    font-size:20px;
+    color:#FFFFFF;
+}
+.titleMini
+{
+    background:#FFC919;
+    padding-top:2%;
+    padding-bottom:2%;
+    max-height:15px;
+    text-align: center;
+    
+}
+#bottomTitle
+{
+    text-align:center;
+    -o-transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -webkit-transform: rotate(-7deg);
+    transform: rotate(-7deg);
+}
+#logoTitle
+{
+    padding-bottom:10%;
+    -webkit-transition:3s;
+    transition:3s;
+}
+#results
+{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:1;
+    -webkit-transition:1s;
+    transition:1s;
+    top:-100%;
+    overflow:hidden;
+}
+#backgroundOfText
+{
+    min-height:80vh;
+    max-height:80vh;
+    background-color:white;
+    -webkit-box-shadow: 10px 10px 5px #888888;
+    -moz-box-shadow: 10px 10px 5px #888888;
+    box-shadow: 10px 10px 5px #888888;
+    height:100%;
+    padding:0;
+    overflow:auto;
+    display:flex;
+    flex-direction:column
+}
+
+#notFooter {
+    min-height:100%;
+}
+
+.black
+{
+    color:black;
+}
+.white
+{
+    color: rgb(110, 110, 110);
+    display: inline;
+    opacity:0.8;
+}
+#returnValue
+{
+    padding-top:10%;
+}
+.inputValueContainer {
+    padding-top:5px;
+    padding-bottom:5px;
+    background:#33CCFF;
+}
+.inputValueContainer > p {
+    width:25%;
+    float:left;
+    text-align:center;
+    margin:0;
+    background:#33CCFF;
+}
+.inputValuesCC {
+    margin:10px;
+    font-size:20px;
+}
+@media (max-width: 768px){
+    h1
+    {
+        font-size:30px;
+    }
+}
+#buttonHolder
+{
+    width:100%;
+}
+button {
+    font-family: 'Segoe UI', 'Open Sans', Arial, sans-serif;
+    display: block;
+    color:white;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    background:#33CCFF;
+    border: none;
+    width:50%;
+    
+    bottom:0;
+}
+
+button:hover {
+    opacity:.85;
+}
+
+button:active {
+    background: hsla(195, 100%, 60%);
+    color: #33CCFF;
+}
+
+#divUpperMenu
+{
+    padding-top:5px;
+}
+.upperMenu
+{
+    padding-top:5px;
+    width:32%;
+    cursor:pointer;
+    text-align:center;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+}
+.upperMenu:hover
+{
+    -o-transform: scale(1.2,1.2);
+    -ms-transform: scale(1.2,1.2);
+    -moz-transform: scale(1.2,1.2);
+    transform: scale(1.2,1.2);
+    background:rgba(255, 201, 25, 0.2);
+}
+
+#qrCode
+{
+    display:none;
+    position:fixed;
+    z-index:3;
+    margin: -262.5px 0 0 -262.5px;
+	width: 550px;
+	height:550px;
+    left:50%;
+    top:40%;
+    -webkit-box-shadow: 10px 10px 5px #888888;
+    -moz-box-shadow: 10px 10px 5px #888888;
+    box-shadow: 10px 10px 5px #888888;
+}
+#wrapText {
+    flex-grow:1;
+}
+
+
+@media (max-width: 600px) {
+
+    #qrCode
+    {
+        padding-left:0;
+        padding-bottom:0;
+        max-width:100%;
+        margin: 0;
+        top:10%;
+        left:0;
+		-webkit-box-shadow: 0;
+		-moz-box-shadow: 0;
+		box-shadow: 0;
+    }
+	#qrCode > img{
+		max-width:100%;
+	}
+}

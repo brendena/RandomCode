@@ -1,0 +1,58 @@
+.chatMessage{
+    margin:0 auto;
+    padding-bottom:5px;
+    padding-top:5px;
+}
+.yourChat{
+    background: rgb(173, 235, 255);
+}
+.opponentsChat{
+    background: rgb(255, 255, 128);   
+}
+#chat{
+    left: 100%;
+    width: 200px;
+    bottom: 20px;
+}
+#chatInput{
+    width:100px;
+    float:left;
+}
+#chatEntered{
+    float:left;
+}
+#chatDialog{
+    height:300px;
+    overflow:auto;
+}
+#gameConnectionBox{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:5;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-image:url(../img/background.svg);
+    background-repeat:no-repeat;
+    background-size:100%;
+    top:-1px;/*weird it was still showing stuff at the top*/
+    overflow:hide;
+    
+}
+#gameConnectionInnerBox{
+    width:350px;
+    height:350px;
+    padding:50px;
+    opacity:1;
+    background:rgba(255,255,255,.9);
+    border-radius:25px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: rgb(242, 0, 0);
+    border-bottom-color: black;
+    border-top-color: black;
+}
+body{
+    margin: 0;
+}

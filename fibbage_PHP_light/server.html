@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/server.css">
+</head>
+<body>
+   <ul>
+       <li><p>Server Page</p></li>
+       <li><p id="status">status -</p></li>
+       <li><a id="connectionButton">connection</a></li>
+       <li><p id="roomId"></p></li>
+       <li><a id="startButton"> start game</a></li>
+       <li><p id="listUsers">Users - </p></li>
+   </ul>
+    
+    <div id="preGame">
+        <div id="listUsers"></div>
+    </div>
+    <div id="container">
+        <div id="center">
+          
+           <div id="QNASection">
+               <p id="QNAText"></p>
+               <div id="QNAFlex" class="flex"></div>
+           </div>
+           
+           <div id="resultsSection">
+               <p id="resultsText"></p>
+               <div id="resultsFlex" class="flex"></div>
+           </div>
+
+            <div id="displayText"></div>
+            
+        </div>
+    </div>
+    <script src="jsServer/sendServer.js"></script>
+    <script src="jsServer/view.js"></script>
+    <script src="jsServer/Connection.js"></script>
+    
+</body>
+</html>

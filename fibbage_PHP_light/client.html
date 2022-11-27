@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/client.css">
+</head>
+<body>
+    <ul>
+       <li><p>Client Page</p></li>
+       <li><p id="status"></p></li>
+       <li><p id="userName"></p></li>
+       <li><p id="roomNumber"></p></li>
+    </ul>
+    
+    <div id="container">
+       <div id="center">
+            <div id="setUpSection">
+                <p class='pQueryResize'>
+                    username  - <input type="text" class='resizeInput' id="username" placeholder="Username:" required>
+                </p>
+                <p class='pQueryResize'>
+                    server id - <input type="number" class='resizeInput' id="serverIdInput" placeholder="serverId:" required>
+                </p>
+                <button class="btn" id="submitUser">add name</button>
+            </div>
+            <div id="gameSection">
+                <p id="waitMessage">You've submited know wait</p>
+                <div id="questionSection">
+
+                   <p id="question"></p>
+                    <input type="text" class='resizeInput' id="questionInput" placeholder="answer:" required>
+                    <button class="btn" id="questionButton" >send answer</button>
+                </div> 
+                
+                <div id="answerSection">
+                </div>
+            </div><!-- end of gameSection -->
+        </div><!-- end of center -->
+    </div><!-- end of container -->
+
+    <script src="js/sendServer.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/Connection.js"></script>
+    
+</body>
+</html>
